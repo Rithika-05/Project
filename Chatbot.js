@@ -9,12 +9,23 @@ function appendMessage(content, sender) {
 }
 
 function botResponse(userInput) {
-    const responses = {
-        "hello": "Hi there! How can I help you?",
-        "how are you": "I'm just a bot, but I'm here to assist you!",
-        "bye": "Goodbye! Have a great day!",
-    };
-    return responses[userInput.toLowerCase()] || "I'm sorry, I didn't understand that.";
+    const lowercaseInput = userInput.toLowerCase();
+    
+    if (lowercaseInput.includes("hello") || lowercaseInput.includes("hi")) {
+        return "Hello! How can I assist you today?";
+    } else if (/how\s+(are|r)\s+you/.test(lowercaseInput)) {
+        return "I'm just a bot, but I'm here to help you with any questions!";
+    } else if (lowercaseInput.includes("your name")) {
+        return "I'm your friendly chatbot, here to assist!";
+    } else if (lowercaseInput.includes("help")) {
+        return "Sure, I can help! What would you like to know?";
+    } else if (lowercaseInput.includes("joke")) {
+        return "Why don't scientists trust atoms? Because they make up everything!";
+    } else if (lowercaseInput.includes("bye")) {
+        return "Goodbye! Have a great day!";
+    } else {
+        return "I'm here to help! Can you rephrase that or ask something else?";
+    }
 }
 
 function sendMessage() {
@@ -29,5 +40,5 @@ function sendMessage() {
 }
 
 function clearChat() {
-    chatMessages.innerHTML = ""; // Clear all messages in the chatbox
+    chatMessages.innerHTML = "";
 }
